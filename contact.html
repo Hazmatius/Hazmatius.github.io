@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<title>Alex Baranski</title>
+
+	<link rel="icon" href="/assets/02.png">
+	<!-- Optional: drop this if you didn't add Pico -->
+	<link rel="stylesheet" href="/assets/pico-main/css/pico.min.css" />
+
+	<!-- Your own small tweaks go here -->
+	<!-- <link rel="stylesheet" href="/assets/styles.css" /> -->
+</head>
+<body>
+	<!-- Your page content -->
+	<main class="container">
+		<p style="text-align: center;">
+			<img src="./assets/bigrobot.gif" alt="Animated GIF" class="center">
+			<h1 style="text-align: center;">Contact</h1>
+		</p>
+		<!-- NAV APPEARS HERE -->
+		<div id="nav"></div>
+		<script>	
+		;(async () => {
+			const res = await fetch('/partials/nav.html', { cache: 'no-store' })
+			document.getElementById('nav').innerHTML = await res.text()
+		})()
+		</script>
+		<br>
+		<p>Personal Email: <a href="alex.baranski@gmail.com<">alex.baranski@gmail.com</a></p>
+        <p>Institutional Email: <a href="alexander.baranski@oist.jp">alexander.baranski@oist.jp</a></p>
+        <p>X: <a href="https://x.com/Alex_Baranski">https://x.com/Alex_Baranski</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/alex-baranski-082100a1/">https://www.linkedin.com/in/alex-baranski-082100a1/</a></p>
+	</main>
+
+	<footer class="container">
+		<small>© <span id="y"></span> Alex Baranski</small>
+	</footer>
+
+	<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>

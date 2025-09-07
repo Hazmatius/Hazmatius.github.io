@@ -1,12 +1,45 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Alex Baranski</title>
-  </head>
-  <body>
-    <h1>Hello, I’m Alex</h1>
-    <p>PhD Student at OIST, Cognitive Neurorobotics Research Unit</p>
-    <p><a href="CV.pdf">My CV</a> | <a href="mailto:you@email.com">Contact</a></p>
-  </body>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<title>Alex Baranski</title>
+
+	<link rel="icon" href="/assets/02.png">
+	<!-- Optional: drop this if you didn't add Pico -->
+	<link rel="stylesheet" href="/assets/pico-main/css/pico.min.css" />
+
+	<!-- Your own small tweaks go here -->
+	<!-- <link rel="stylesheet" href="/assets/styles.css" /> -->
+</head>
+<body>
+	<!-- Your page content -->
+	<main class="container">
+		<p style="text-align: center;">
+			<img src="./assets/bigrobot.gif" alt="Animated GIF" class="center">
+			<h1 style="text-align: center;">Alex Baranski's Website</h1>
+		</p>
+		<!-- NAV APPEARS HERE -->
+		<div id="nav"></div>
+		<script>	
+		;(async () => {
+			const res = await fetch('/partials/nav.html', { cache: 'no-store' })
+			document.getElementById('nav').innerHTML = await res.text()
+		})()
+		</script>
+		<br>
+		<p>My name is Alex Baranski, I'm studying real-time problem-solving and behavioral adaptation as a PhD student at the <a href="https://www.oist.jp/">Okinawa Institute of Science and Technology</a>.</p>
+
+		<p>I've developed a theory of behavioral search that explains how an agent can solve a problem it's never seen before.The theory relies on a method of constructing an infinite but countable set of goal-oriented behaviors, where a behavior is a sequence of subgoals in a continuous state-space that you think you need to reach in order to reach your final goal. In priciple, this infinite set contains every behavior: programming a computer, playing baseball, or navigating a maze. The infinite set is indexed by a cognitive graph, which when incrementally modified in the appropriate way, allows the agent to increment through the space in a real-time experience-dependent way that is non-naive but complete. This guarantees that if a solution to the problem exists, it will eventually be found. I've developed a specific algorithm for performing this earch, and implemented it in a neural network based off of the hippocampus. If you are interested, read more about it <a href="https://arxiv.org/abs/2410.01349">here</a>.</p>
+
+		<p>If you are interested in my ideas or projects, why not hire me? You can <a href="/contact.html">reach out</a> to me.</p>
+	</main>
+
+	<footer class="container">
+		<small>© <span id="y"></span> Alex Baranski</small>
+	</footer>
+
+	<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
 </html>

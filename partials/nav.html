@@ -1,0 +1,17 @@
+<nav class="site-nav container">
+  <a href="/">Home</a>
+  <a href="/contact.html">Contact</a>
+  <a href="/projects.html">Projects</a>
+  <a href="/ideas.html">Ideas</a>
+  <a href="/assets/CV.pdf">CV</a>
+</nav>
+<script>
+  // highlight current page
+  const path = location.pathname.replace(/index\.html$/, '') || '/'
+  document.querySelectorAll('.site-nav a').forEach(a => {
+    const href = new URL(a.href).pathname
+    if ((href === '/' && path === '/') || (href !== '/' && path.startsWith(href))) {
+      a.classList.add('active')
+    }
+  })
+</script>
