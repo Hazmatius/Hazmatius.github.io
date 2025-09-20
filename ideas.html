@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<title>Alex Baranski</title>
+
+	<link rel="icon" href="/assets/02.png">
+	<!-- Optional: drop this if you didn't add Pico -->
+	<link rel="stylesheet" href="/assets/pico-main/css/pico.min.css" />
+
+	<!-- Your own small tweaks go here -->
+	<!-- <link rel="stylesheet" href="/assets/styles.css" /> -->
+</head>
+<body>
+	<!-- Your page content -->
+	<main class="container">
+		<p style="text-align: center;">
+			<img src="./assets/bigrobot.gif" alt="Animated GIF" class="center">
+			<h1 style="text-align: center;">Ideas</h1>
+		</p>
+		<!-- NAV APPEARS HERE -->
+		<div id="nav"></div>
+		<script>	
+		;(async () => {
+			const res = await fetch('/partials/nav.html', { cache: 'no-store' })
+			document.getElementById('nav').innerHTML = await res.text()
+		})()
+		</script>
+		<br>
+		<h2>Behavior as Search</h2>
+		
+		<p>What should you do when you try something, but it doesn't work?</p>
+
+		<p>Obviously, you should try something else. William James put it beautifully, when he said that "nothing is more natural than that, when the easiest means of effecting [a] purpose prove fruitless, other means should be tried".</p>
+
+		<p>But what should you try?</p>
+
+		Reinforcement learning (RL) is a way of getting an <i>agent</i> to perform a <i>task</i>. There are several different ways of doing RL, but what they all have in common is that they learn very slowly, and 
+		The dominant method of getting a machine to perform a task is reinforcement learning (RL), which treates the behavior of an agent as arising from a <i>policy</i> which can be <i>optimized</i> in order to maximize a <i>reward</i>. The main problems with RL is that it is incredibly inefficient, and it is incredibly brittle. That means that it takes a <i>lot</i> of time for an RL agent to learn how to do a task, and if you change the task even a little bit, the agent will totally flop and do something weird. I think the reason for this is fairly simple: optimizing a policy to maximize reward is not actually the right model of organic behavior!
+		
+		
+
+		<iframe width="420" height="315" style="text-align: center;"
+			src="https://www.youtube.com/watch?v=cjUgQJc__J4">
+		</iframe> 
+	</main>
+
+	<footer class="container">
+		<small>© <span id="y"></span> Alex Baranski</small>
+	</footer>
+
+	<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>
