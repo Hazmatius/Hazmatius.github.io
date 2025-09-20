@@ -33,18 +33,24 @@
 		
 		<p>What should you do when you try something, but it doesn't work?</p>
 
-		<p>Obviously, you should try something else. William James put it beautifully, when he said that "nothing is more natural than that, when the easiest means of effecting [a] purpose prove fruitless, other means should be tried".</p>
+		<p>A lot of methods in reinforcement learning basically just involve performing random actions and hoping that something works, by luck. Once that happens, that randomly good behavior can be "reinforced" so that it will happen more often in similar circumstances.</p>
 
-		<p>But what should you try?</p>
-
-		Reinforcement learning (RL) is a way of getting an <i>agent</i> to perform a <i>task</i>. There are several different ways of doing RL, but what they all have in common is that they learn very slowly, and 
-		The dominant method of getting a machine to perform a task is reinforcement learning (RL), which treates the behavior of an agent as arising from a <i>policy</i> which can be <i>optimized</i> in order to maximize a <i>reward</i>. The main problems with RL is that it is incredibly inefficient, and it is incredibly brittle. That means that it takes a <i>lot</i> of time for an RL agent to learn how to do a task, and if you change the task even a little bit, the agent will totally flop and do something weird. I think the reason for this is fairly simple: optimizing a policy to maximize reward is not actually the right model of organic behavior!
+		<p>Now, without any kind of prior knowledge, it may seem that this is as good as you can do... but actually, there is a simple way we can do better. William James put it beautifully:  "nothing is more natural than that, when the easiest means of effecting [a] purpose prove fruitless, other means should be tried."</p>
 		
-		
+		<p>In other words, if what you do doesn't work, just try something else. But what?</p>
 
-		<iframe width="420" height="315" style="text-align: center;"
-			src="https://www.youtube.com/watch?v=cjUgQJc__J4">
-		</iframe> 
+		<p style="text-align: center;">
+		<iframe
+			width="560"
+			height="315"
+			src="https://www.youtube-nocookie.com/embed/cjUgQJc__J4?rel=0&modestbranding=1"
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			referrerpolicy="strict-origin-when-cross-origin"
+			allowfullscreen>
+		</iframe>
+		</p>
 	</main>
 
 	<footer class="container">
