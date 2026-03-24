@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="en" data-bss-forced-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>alex_website</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bss-overrides.css">
+    <link rel="stylesheet" href="assets/css/lcl-container.css">
+    <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body class="font-monospace">
+    <nav class="navbar navbar-expand-md bg-body py-3">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span>Alex Baranski</span></a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="assets/AlexBaranskiCV.pdf">CV</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="text-center">Hyperadaptability by Behavioral Search</h1>
+        <p>When I look at a lot of machine learning systems, I'm overwhelmed by the impression that they are very brittle, and require a massive amount of human effort to work properly... only for them to fail in unpredictable and spectacular ways. I find this troubling, because Earth is literally crawling with extremely robust, adaptable systems that can learn and problem-solve fully autonomously. We're talking not just humans and other apes, but rats, bugs, and even particularly motivated single-celled organisms! How have we not figured this out yet?</p>
+        <p>I think the basic answer is that we're actually too focused on intelligence, the ability to extract abstract patterns from examples that generalize to new problems. It's a great ability, but it's intrinsically fickle, the history of science is proof that no generalization survives forever. To survive in this world, you gotta ADAPT, and adaptation requires the ability to do things that are NEW.</p>
+        <p>In my thesis, I introduce a theoretical limit of adaptability to probe this question: hyperadaptability, the ability to solve any solvable problem, in finite time, without any prior knowledge or experience. Because the hyperadaptable agent might know nothing, there is practically no chance that it "know" what to do when it encounters a problem, it will, by definition, HAVE to do something completely new. The only way to be SURE it will solve the problem is to, as the saying goes, "leave no stone unturned", it will just have to roll up it's sleeves and try every potential solution.</p>
+        <p>But how is that possible? Strictly speaking, it's not: a potential solution is just a behavior, and the set of all possible behaviors is, technically speaking, uncountably infinite, it can't be "searched", which is what it would mean to "try every potential solution". However, there is a SUBSET of all behaviors, which CAN be searched exhaustively, and which APPROXIMATES to arbitrary precision EVERY behavior in the set of ALL possible behaviors.</p>
+        <p></p>
+        <p>Moreover, our agent can CHOOSE the ORDER in which it tries every behavior... and the order can CHANGE in real-time. What that means is that the agent can be clever, it can use the information about its successes and failures to prioritize and deprioritize different plans, without ever completely ignoring any plan forever... at least, until it finally finds a solution.</p>
+        <p>If you're curious for more details and some of the broader philosophical underpinnings of my work, why don't you take a look at my thesis,&nbsp;<a href="assets/AlexBaranskiThesis.pdf"><span style="color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));">Hyperadaptability by Behavioral Search</span></a>? If you read it, let me know what you think!</p>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+
+</html>

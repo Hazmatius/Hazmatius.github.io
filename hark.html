@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="en" data-bss-forced-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>alex_website</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bss-overrides.css">
+    <link rel="stylesheet" href="assets/css/lcl-container.css">
+    <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body class="font-monospace">
+    <nav class="navbar navbar-expand-md bg-body py-3">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span>Alex Baranski</span></a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="assets/AlexBaranskiCV.pdf">CV</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="text-center">Harmonic Relational Key Memory</h1>
+        <p>Really, this project was a sub-project of my PhD, and was the result of a merging between several originally distinct thoughts that were running through my mind.</p>
+        <p>First, is it possible for vague ideas to become precise ones? The best analogy I can think of for what it even MEANS for an idea to be vague, is to say something like it's "blurry"... but that can't be right, because that would imply that there was somehow an existing "crisp" idea in our mind that was BEING blurred, which would't make any sense. Somehow, the representational substrate must support representations that have an INTRINSICALLY variable crispness.</p>
+        <p>Second, I'm interested in how information can be quickly stored, deleted, and modified in neural systems to support rapid learning. Because of that, I quickly gravitated towards different forms of Hebbian learning, in particular, the form of learning used in heteroassociative memory systems. You can think of such memory systems as being sort of like a dictionary, mapping "key" vectors to "value" vectors. But, I wondered if there was some way that the keys could be systematically organized to represent an underlying, lower-dimensional continuous space. We have strong evidence that this is exactly the function served by grid cells in the entorhinal cortex, and I used that as my starting point.</p>
+        <p>Third, in regards to representing space, I'm skeptical that we maintain an internal allocentric coordinate system that privileges a specific point as the origin... so to me, if there are these "spatial keys" that represent space, it can't be the case that we require the underlying Euclidean coordinates to produce these keys, the keys must be able to be produced RELATIVE to each other.</p>
+        <p>The end result of pondering and investigating these questions was, I discovered later, a sort of variation on the method of Random Fourier Features.</p>
+        <p>First, let's imagine there's a space we want to represent, \(\mathbb{R}^d\). We're going to represent \(\mathbb{R}^d\) in terms of $N &gt;&gt; d$ complex plane waves, which are conceptually analogous to grid cells (actually, they are a VERY close analog to BAND cells). Let's say that \(\mathcal{C} = \{z \in \mathbb{C} : |z|=1\}\) is the set of all unit-magnitude complex numbers. Then, each complex plane wave is a function \(k_j : \mathbb{R}^d \rightarrow \mathcal{C}\). Each complex plane wave \(k_j\) is going to have an ORIENTED FREQUENCY, given by the vector \(\boldsymbol{\gamma}_j \in \mathbb{R}^d\), where the direction of \(\boldsymbol{\gamma}_j\) specifies the direction in which the plane wave is pointing, and its magnitude specifies the frequency of the wave. This means an individual plane wave has this form: \[k_j(x) = k_j(\boldsymbol{0})e^{2\pi i \boldsymbol{\gamma}_j^{\top}\boldsymbol{x}}\] where \(k_j(\boldsymbol{0})\) is a phase offset, the value of \(k_j\) at the origin \(\boldsymbol{0} \in \mathbb{R}^d\).</p>
+        <p>Now suppose we have \(N\) of these complex plane waves, we could organize the value of all of these plane waves into a vector \[\boldsymbol{k}(x) = \boldsymbol{k}(\boldsymbol{0}) \odot e^{2\pi i \mathbf{\Gamma} \boldsymbol{x}}\]where \(\mathbf{\Gamma}\) is just a matrix composed of all the corresponding oriented frequency vectors \(\gamma_j\), which we assume are each drawn from some distribution \(p_{\boldsymbol{\gamma}}(\boldsymbol{\gamma}) : \mathbb{R}^d \rightarrow \mathbb{R}\).</p>
+        <p>Now, \(\boldsymbol{k}(\boldsymbol{x}) : \mathbb{R}^d \rightarrow \mathcal{C}^N\) is a function that assigns points in $\mathbb{R}^d$ to complex-valued "key" vectors in $|mathcal{C}^N... this is fine, but it requires us to have access to the underlying Euclidean coordinate space. Let's fix that. Consider the following, where \(\boldsymbol{x}' = \boldsymbol{x} + \boldsymbol{\delta}\):</p>
+        <p>\begin{align}<br>\boldsymbol{k}(\boldsymbol{x}') &amp;= \boldsymbol{k}(\boldsymbol{0}) \odot e^{2\pi i \mathbf{\Gamma} \boldsymbol{x}'} \\<br>\boldsymbol{k}(\boldsymbol{x} + \boldsymbol{\delta}) &amp;= \boldsymbol{k}(\boldsymbol{0}) \odot e^{2\pi i \mathbf{\Gamma} (\boldsymbol{x} + \boldsymbol{\delta})} \\<br>&nbsp;&amp;= \boldsymbol{k}(\boldsymbol{0}) \odot e^{2\pi i \mathbf{\Gamma} \boldsymbol{x} + 2\pi i \mathbf{\Gamma} \boldsymbol{\delta}} \\<br>&nbsp;&amp;= \boldsymbol{k}(\boldsymbol{0}) \odot e^{2\pi i \mathbf{\Gamma} \boldsymbol{x}} \odot e^{2\pi i \mathbf{\Gamma} \boldsymbol{\delta}} \\<br>&nbsp;&amp;= \boldsymbol{k}(\boldsymbol{x}) \odot e^{2\pi i \mathbf{\Gamma} \boldsymbol{\delta}}<br>\end{align}This means that if we have an existing key-vector, we can define OTHER key vectors RELATIVE to it... we can actually discard the underlying Euclidean coordinate system! Or at least, we can discard the choice of a specific ORIGIN, we still have to use RELATIVE coordinates via the displacement vector \(\boldsymbol{\delta} \in \mathbb{R}^d\).</p>
+        <p>Well, what does this actually buy us?</p>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+
+</html>

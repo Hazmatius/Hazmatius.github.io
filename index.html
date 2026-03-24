@@ -1,45 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="dark" lang="en" data-bss-forced-theme="dark">
+
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	
-	<title>Alex Baranski</title>
-
-	<link rel="icon" href="/assets/02.png">
-	<!-- Optional: drop this if you didn't add Pico -->
-	<link rel="stylesheet" href="/assets/pico-main/css/pico.min.css" />
-
-	<!-- Your own small tweaks go here -->
-	<!-- <link rel="stylesheet" href="/assets/styles.css" /> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>alex_website</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bss-overrides.css">
+    <link rel="stylesheet" href="assets/css/lcl-container.css">
+    <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body>
-	<!-- Your page content -->
-	<main class="container">
-		<p style="text-align: center;">
-			<img src="./assets/bigrobot.gif" alt="Animated GIF" class="center">
-			<h1 style="text-align: center;">Alex Baranski's Website</h1>
-		</p>
-		<!-- NAV APPEARS HERE -->
-		<div id="nav"></div>
-		<script>	
-		;(async () => {
-			const res = await fetch('/partials/nav.html', { cache: 'no-store' })
-			document.getElementById('nav').innerHTML = await res.text()
-		})()
-		</script>
-		<br>
-		<p>My name is Alex Baranski, I'm studying real-time problem-solving and behavioral adaptation as a PhD student at the <a href="https://www.oist.jp/">Okinawa Institute of Science and Technology</a>.</p>
 
-		<p>I've developed a theory of behavioral search that explains how an agent can solve a problem it's never seen before. The theory relies on a method of constructing an infinite but countable set of goal-oriented behaviors. A behavior is a sequence of subgoals in a continuous state-space that you think you need to reach in order to accomplish your final goal. In thise sense, a behavior is also a hypothesis about how to solve a problem. In priciple, this infinite set contains every behavior: programming a computer, playing baseball, or navigating a maze. The infinite behavior-space is indexed by a cognitive graph, which when incrementally modified in the appropriate way, allows the agent to advance through behavior-space so that any behavior can be tried, if necessary. This guarantees that if a solution to the problem exists, it will eventually be found, as you long as you keep trying different things by enumerating the set. The enumeration (or search) is non-naive in the sense that the history of trials dynamically re-orders the rest of the search. I've written an algorithm for performing this search, and implemented it in a novel neural network based off of the hippocampus that enables rapid adaptation. If you are interested, read more about it <a href="https://arxiv.org/abs/2410.01349">here</a>.</p>
-
-		<p>If you are interested in my ideas or projects, why not hire me? You can <a href="/contact.html">reach out</a> to me.</p>
-	</main>
-
-	<footer class="container">
-		<small>© <span id="y"></span> Alex Baranski</small>
-	</footer>
-
-	<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+<body class="font-monospace">
+    <nav class="navbar navbar-expand-md bg-body py-3">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span>Alex Baranski</span></a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="assets/AlexBaranskiCV.pdf">CV</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="py-4 py-xl-5" style="height: 1200px;background-image: url(assets/img/fractal.png);background-position: center;background-size: cover;">
+        <div class="container mt-sm-2 mt-md-4 mt-lg-6 mt-xl-8 mt-xxl-10 mb-sm-2 mb-md-4 mb-lg-6 mb-xl-8 mb-xxl-10">
+            <div class="row mb-sm-1 mb-md-2 mb-lg-3">
+                <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center mx-auto">
+                    <div>
+                        <h1 class="text-uppercase fw-bold bg-dark mb-3"><strong>Alex BaranskI's Personal Website</strong></h1>
+                        <div class="bg-dark">
+                            <p class="text-start m-1 mb-4">What a curious mystery this world of ours is! I'm mostly focused on understanding autonomous problem-solving, self-organization, and cognition, but I have a broader love for mathematics, psychology, computer science, programming, metaphysics, art, history, and technology.<br><br>This website is a place for my thoughts, questions, projects, and contact information if you want to talk or work together.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
+
 </html>

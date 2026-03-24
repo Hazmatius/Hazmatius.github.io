@@ -1,44 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="dark" lang="en" data-bss-forced-theme="dark">
+
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	
-	<title>Alex Baranski</title>
-
-	<link rel="icon" href="/assets/02.png">
-	<!-- Optional: drop this if you didn't add Pico -->
-	<link rel="stylesheet" href="/assets/pico-main/css/pico.min.css" />
-
-	<!-- Your own small tweaks go here -->
-	<!-- <link rel="stylesheet" href="/assets/styles.css" /> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>alex_website</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bss-overrides.css">
+    <link rel="stylesheet" href="assets/css/lcl-container.css">
+    <link rel="stylesheet" href="assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body>
-	<!-- Your page content -->
-	<main class="container">
-		<p style="text-align: center;">
-			<img src="./assets/bigrobot.gif" alt="Animated GIF" class="center">
-			<h1 style="text-align: center;">Contact</h1>
-		</p>
-		<!-- NAV APPEARS HERE -->
-		<div id="nav"></div>
-		<script>	
-		;(async () => {
-			const res = await fetch('/partials/nav.html', { cache: 'no-store' })
-			document.getElementById('nav').innerHTML = await res.text()
-		})()
-		</script>
-		<br>
-		<p>Personal Email: <a href="mailto:alex.baranski@gmail.com<">alex.baranski@gmail.com</a></p>
-        <p>Institutional Email: <a href="mailto:alexander.baranski@oist.jp">alexander.baranski@oist.jp</a></p>
-        <p>X: <a href="https://x.com/Alex_Baranski">https://x.com/Alex_Baranski</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/alex-baranski-082100a1/">https://www.linkedin.com/in/alex-baranski-082100a1/</a></p>
-	</main>
 
-	<footer class="container">
-		<small>© <span id="y"></span> Alex Baranski</small>
-	</footer>
-
-	<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+<body class="font-monospace">
+    <nav class="navbar navbar-expand-md bg-body py-3">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span>Alex Baranski</span></a><button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="assets/AlexBaranskiCV.pdf">CV</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="text-center">Get In Touch!</h1>
+        <p>Personal Email:&nbsp;<a href="alex.baranski@gmail.com">alex.baranski@gmail.com</a></p>
+        <p>Institutional Email:&nbsp;<a href="alexander.baranski@oist.jp">alexander.baranski@oist.jp</a></p>
+        <p>X (Twitter):&nbsp;<a href="https://x.com/Alex_Baranski">https://x.com/Alex_Baranski</a></p>
+        <p>LinkedIn:&nbsp;<a href="https://www.linkedin.com/in/alex-baranski-082100a1/">https://www.linkedin.com/in/alex-baranski-082100a1/</a></p>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
+
 </html>
