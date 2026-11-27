@@ -17,6 +17,7 @@ const paneAt=index=>index===2?{x:0,y:0,width:preview.clientWidth,height:preview.
 function ensureViews(){project.secondaryView??=defaultView('escher');project.layout??='single';activeIndex=0;}
 let shape='circle',redo=[],active=null,pointer=null,space=false,queued=false,busy=false,dirty=false,replayID=0,total=0;
 const pending=[];const touchPan=new TouchPan();let numericSliders;
+const nativeTouchEvents='ontouchstart' in window;
 const center=()=>project.center||[0,0];
 const degrees=rad=>Math.round(rad*180/Math.PI*100)/100;
 function status(text){$('status').textContent=text;}
@@ -101,6 +102,9 @@ function sample(p){
 function finish(){active=null;pointer=null;touchPan.clear();}
 function pointerDown(e){
  if(e.pointerType==='touch'&&panTool){
+  // Safari also sends PointerEvents for these contacts. Handle each contact
+  // through just one API; touch handlers below explicitly own native gestures.
+  if(nativeTouchEvents)return;
   if(busy||pointer)return;e.preventDefault();
   const a=eventPane(e);
   if(touchPan.begin(e.pointerId,{x:a.x,y:a.y},a.index,e.currentTarget)){
@@ -118,6 +122,7 @@ function pointerDown(e){
  const hex=$('color').value;active={shape,space:a.view.mode,...(a.view.mode==='log'?{aspect:a.pane.height/a.pane.width}:{}),color:[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).concat(+$('opacity').value/100),samples:new Samples()};project.strokes.push(active);redo=[];sample(pointer.p);
 }
 function pointerMove(e){
+ if(nativeTouchEvents&&e.pointerType==='touch'&&panTool)return;
  if(touchPan.has(e.pointerId)){
   e.preventDefault();const a=eventPane(e,touchPan.index);
   touchPan.move(e.pointerId,{x:a.x,y:a.y},a.view,a.pane.width,a.pane.height);request();return;
@@ -135,6 +140,35 @@ function pointerMove(e){
  }
 }
 for(const surface of [canvas,preview]){
+ const touchPoint=(e,t,index)=>eventPane({currentTarget:surface,clientX:t.clientX,clientY:t.clientY},index);
+ surface.addEventListener('touchstart',e=>{
+  if(!panTool)return;
+  e.preventDefault();if(busy||pointer)return;
+  for(const t of e.changedTouches){
+   const a=touchPoint(e,t);
+   if(touchPan.begin(`touch:${t.identifier}`,{x:a.x,y:a.y},a.index,surface))activeIndex=a.index;
+  }
+  $('cursor').style.display='none';$('previewCursor').style.display='none';
+  status('Touch pan ready · pinch with two fingers to zoom');request();
+ },{passive:false});
+ surface.addEventListener('touchmove',e=>{
+  if(!panTool)return;e.preventDefault();
+  if(touchPan.surface!==surface)return;
+  for(const t of e.changedTouches){
+   const id=`touch:${t.identifier}`;if(!touchPan.has(id))continue;
+   const a=touchPoint(e,t,touchPan.index);
+   touchPan.move(id,{x:a.x,y:a.y},a.view,a.pane.width,a.pane.height);
+  }
+  request();
+ },{passive:false});
+ for(const type of ['touchend','touchcancel'])surface.addEventListener(type,e=>{
+  if(panTool&&e.cancelable)e.preventDefault();
+  for(const t of e.changedTouches)touchPan.end(`touch:${t.identifier}`);
+ },{passive:false});
+ // WebKit's native pinch recognizer can otherwise zoom the containing page.
+ for(const type of ['gesturestart','gesturechange','gestureend'])surface.addEventListener(type,e=>{
+  if(panTool)e.preventDefault();
+ },{passive:false});
  surface.addEventListener('pointerdown',pointerDown);surface.addEventListener('pointermove',pointerMove);
  for(const event of ['pointerup','pointercancel','lostpointercapture'])surface.addEventListener(event,e=>{if(touchPan.has(e.pointerId)){touchPan.end(e.pointerId);return;}if(pointer?.id===e.pointerId)finish();});
  surface.addEventListener('pointerleave',()=>$(surface===preview?'previewCursor':'cursor').style.display='none');
