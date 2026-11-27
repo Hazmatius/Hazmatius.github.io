@@ -6,6 +6,7 @@ import {defaultView,paneRects,cameraPoint,brushRadius,zoomAt,panBy} from './view
 import {setupColorPicker} from './colors.js';
 import {galleryExample} from './examples.js';
 import {setupNumericSliders} from './numeric-sliders.js';
+import {TouchPan} from './touch-pan.js';
 const $=id=>document.getElementById(id),canvas=$('canvas'),preview=$('preview'),previewContext=preview.getContext('2d');
 let renderer;
 try{renderer=new Renderer(canvas);}catch(e){$('status').textContent=e.message;$('hint').textContent='WebGL 2 is required';throw e;}
@@ -15,7 +16,7 @@ const viewAt=index=>index===2?previewView:index===0?project.view:(project.second
 const paneAt=index=>index===2?{x:0,y:0,width:preview.clientWidth,height:preview.clientHeight}:paneRects(canvas.clientWidth,canvas.clientHeight,project.layout)[index];
 function ensureViews(){project.secondaryView??=defaultView('escher');project.layout??='single';activeIndex=0;}
 let shape='circle',redo=[],active=null,pointer=null,space=false,queued=false,busy=false,dirty=false,replayID=0,total=0;
-const pending=[];let numericSliders;
+const pending=[];const touchPan=new TouchPan();let numericSliders;
 const center=()=>project.center||[0,0];
 const degrees=rad=>Math.round(rad*180/Math.PI*100)/100;
 function status(text){$('status').textContent=text;}
@@ -97,8 +98,19 @@ function sample(p){
  const start=active.samples.length;active.samples.push(...p,r);total++;
  const last=pending.at(-1);if(last?.stroke===active&&last.end===start)last.end++;else pending.push({stroke:active,start,end:start+1});dirty=true;request();
 }
-function finish(){active=null;pointer=null;}
+function finish(){active=null;pointer=null;touchPan.clear();}
 function pointerDown(e){
+ if(e.pointerType==='touch'&&panTool){
+  if(busy||pointer)return;e.preventDefault();
+  const a=eventPane(e);
+  if(touchPan.begin(e.pointerId,{x:a.x,y:a.y},a.index,e.currentTarget)){
+   e.currentTarget.setPointerCapture(e.pointerId);activeIndex=a.index;
+   $('cursor').style.display='none';$('previewCursor').style.display='none';
+   status('Pan · drag with one finger; pinch or move with two fingers');request();
+  }
+  return;
+ }
+ if(touchPan.active)return;
  if(busy||pointer||![0,1].includes(e.button))return;e.preventDefault();e.currentTarget.setPointerCapture(e.pointerId);
  const a=eventPane(e);activeIndex=a.index;
  pointer={id:e.pointerId,index:a.index,x:e.clientX,y:e.clientY,p:world(e,a.index),pan:panTool||space||e.button===1};
@@ -106,6 +118,11 @@ function pointerDown(e){
  const hex=$('color').value;active={shape,space:a.view.mode,...(a.view.mode==='log'?{aspect:a.pane.height/a.pane.width}:{}),color:[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).concat(+$('opacity').value/100),samples:new Samples()};project.strokes.push(active);redo=[];sample(pointer.p);
 }
 function pointerMove(e){
+ if(touchPan.has(e.pointerId)){
+  e.preventDefault();const a=eventPane(e,touchPan.index);
+  touchPan.move(e.pointerId,{x:a.x,y:a.y},a.view,a.pane.width,a.pane.height);request();return;
+ }
+ if(touchPan.active)return;
  cursor(e);if(!pointer||pointer.id!==e.pointerId)return;
  if(pointer.pan){
   const a=eventPane(e,pointer.index),dx=e.clientX-pointer.x,dy=e.clientY-pointer.y;
@@ -119,7 +136,7 @@ function pointerMove(e){
 }
 for(const surface of [canvas,preview]){
  surface.addEventListener('pointerdown',pointerDown);surface.addEventListener('pointermove',pointerMove);
- for(const event of ['pointerup','pointercancel','lostpointercapture'])surface.addEventListener(event,finish);
+ for(const event of ['pointerup','pointercancel','lostpointercapture'])surface.addEventListener(event,e=>{if(touchPan.has(e.pointerId)){touchPan.end(e.pointerId);return;}if(pointer?.id===e.pointerId)finish();});
  surface.addEventListener('pointerleave',()=>$(surface===preview?'previewCursor':'cursor').style.display='none');
  surface.addEventListener('wheel',e=>{e.preventDefault();const a=eventPane(e);activeIndex=a.index;zoomAt(a.view,a.x,a.y,a.pane.width,a.pane.height,Math.exp(-e.deltaY*.001));request();},{passive:false});
 }
