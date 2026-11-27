@@ -1,0 +1,22 @@
+leiden-p4.jpg
+Source: https://pub.math.leidenuniv.nl/~smitbde/escherdroste/images/p4.jpg
+Source page: https://pub.math.leidenuniv.nl/~smitbde/escherdroste/page_menu=steps&sub=phase4.html
+Project: Escher and the Droste effect, Universiteit Leiden.
+The source page credits the periodic grayscale reconstruction to Jacqueline
+Hofstra. The project also credits Hans Richter, Joost Batenburg, Bart de Smit
+and Hendrik Lenstra. It is based on M. C. Escher's Print Gallery (1956).
+The project website states that M. C. Escher works are copyright Cordon
+Art-Baarn-the Netherlands, used there by permission, all rights reserved.
+This attribution does not assert that the artwork is openly licensed.
+
+Paper: Bart de Smit and Hendrik W. Lenstra Jr., The Mathematical Structure
+of Escher's Print Gallery, Notices of the AMS 50(4), April 2003, 446–451.
+https://www.ams.org/notices/200304/fea-escher.pdf
+
+LogPaint reference asset ID: leiden-p4-v1. The published web JPEG is low
+resolution. A single approximate rectangular log period is sampled from it
+at runtime (x=50, y=38.75, width=310*log(256)/(2*pi), height=310), using q=256.
+This fixes the default scale/orientation; small JPEG/crop seam errors remain.
+It is a derived preview, not a claim of pixel-identical historical restoration.
+
+examples.js is a separate original editable gallery illustration.
